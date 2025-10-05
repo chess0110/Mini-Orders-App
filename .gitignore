@@ -1,0 +1,105 @@
+# Dependencias
+node_modules/
+/.pnp
+.pnp.js
+
+# Directorios de compilación
+/dist
+/build
+/.output
+/bin
+/obj
+[Rr]elease/
+/[Dd]ebug/
+
+# Directorios de caché
+/.cache
+/.tmp
+.cache/
+temp/
+
+# Archivos de entorno
+.env
+.env.*
+!.env.example
+secrets.json
+LocalSettings.xml
+appsettings.Development.json
+appsettings.Staging.json
+appsettings.Production.json
+
+# Archivos de logs
+*.log
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Directorios de IDEs
+.vscode/
+.idea/
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vssscc
+*.vspscc
+*.vsscc
+
+# ReSharper
+*.resharper*
+_ReSharper.*/
+*.dotSettings*
+
+# Build results
+*.exe
+*.dll
+*.pdb
+*.tmp
+*.lib
+*.so
+*.a
+*.tlog
+*.idb
+*.ipch
+*.pch
+*.pchi
+*.aps
+*.bsc
+*.sbr
+*.ilk
+
+# Temporary files
+*.bak
+*.ncb
+*.opendb
+*.vshost.*
+*.userprefs
+*.swp
+*.swo
+
+# Project user files
+*.csproj.user
+*.vbproj.user
+*.fsproj.user
+*.sqlproj.user
+*.dbproj.user
+*.dcproj.user
+*.ccproj.user
+
+# Azure
+*.publishsettings
+*.azurePubxml
+*.vsix
+
+# Test and coverage
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+
+# Frontend (if applicable)
+wwwroot/lib/
