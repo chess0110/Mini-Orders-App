@@ -211,11 +211,16 @@
   "components": {
     "schemas": {
       "AddOrderModel": {
+        "required": [
+          "cliente",
+          "total"
+        ],
         "type": "object",
         "properties": {
           "cliente": {
-            "type": "string",
-            "nullable": true
+            "maxLength": 40,
+            "minLength": 1,
+            "type": "string"
           },
           "total": {
             "type": "number",
@@ -225,6 +230,10 @@
         "additionalProperties": false
       },
       "OrdersModel": {
+        "required": [
+          "cliente",
+          "total"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -232,8 +241,9 @@
             "format": "uuid"
           },
           "cliente": {
-            "type": "string",
-            "nullable": true
+            "maxLength": 40,
+            "minLength": 1,
+            "type": "string"
           },
           "fecha": {
             "type": "string",

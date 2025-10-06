@@ -14,7 +14,14 @@ namespace OrdersChallenge.Controllers
         [HttpGet]
         public ActionResult<List<OrdersModel>> GetOrders()
         {
-            return OrdersDataStorage.OrdersDs.OrdersCollection;
+            try
+            {
+                return OrdersDataStorage.OrdersDs.OrdersCollection;
+            }
+            catch (Exception ex) { 
+                return StatusCode(500, ex);
+            }
+            
         }
 
 
@@ -34,6 +41,12 @@ namespace OrdersChallenge.Controllers
         [HttpPost]
         public ActionResult<OrdersModel> PostOrder([FromBody]AddOrderModel currentPost)
         {
+            
+            if (currentPost.Total == 0)
+            {
+                return BadRequest("Total debe ser mayor que cero");
+            }
+            
             var orderToPost = new OrdersModel()
             {
                 Id = Guid.NewGuid(),
@@ -69,7 +82,12 @@ namespace OrdersChallenge.Controllers
             if (findOrderToPut == null)
             {
                 return NotFound("No se encontro la orden.");
+            }else if(findOrderToPut.Total == 0)
+            {
+                return BadRequest("Total debe ser mayor que cero");
             }
+
+
             findOrderToPut.Cliente = orderToPut.Cliente;
             findOrderToPut.Total = orderToPut.Total;
             findOrderToPut.Fecha = DateTime.Now;

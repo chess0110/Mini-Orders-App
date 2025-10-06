@@ -12,7 +12,8 @@ namespace OrdersChallenge.Services
         // Datos de prueba ..
         public OrdersDataStorage() {
             OrdersCollection = new List<OrdersModel>() {
-                new OrdersModel()
+                // Para pruebas de los protocolos
+                /*new OrdersModel()
                 {
                     Id = Guid.NewGuid(),
                     Cliente = "Juan Ramirez",
@@ -32,7 +33,7 @@ namespace OrdersChallenge.Services
                     Cliente = "Augusto Martinez",
                     Fecha = DateTime.Now,
                     Total = 46548
-                }
+                }*/
 
             };
 
