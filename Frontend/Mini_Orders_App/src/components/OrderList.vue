@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { GetOrders } from '../services/HttpRequests.ts'
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
+import AddOrder from './AddOrder.vue'
 
 type OrderType = {
     id: string;
@@ -10,58 +11,92 @@ type OrderType = {
 };
 
 const data = ref<OrderType[]>([])
+const currentId = ref()
+const currentPage = ref(1);
+const itemsPerPage = 12;
+const viewAddPost = ref<boolean>(false)
+
 
 onMounted( async () => {
     data.value = await GetOrders()
-    console.log(data.value)
+    //console.log(data.value)
 });
 
-//const ViewId()
+
+const BtnViewId = (id :string) => {
+    if (id == currentId.value){
+        currentId.value=""
+    }else{
+        currentId.value = id
+    }
+    //console.log(id)
+}
 
 
+const paginatedOrders = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  return data.value.slice(start, end);
+});
+
+const totalPages = computed(() => {
+  return Math.ceil(data.value.length / itemsPerPage);
+});
+
+
+const setViewAddPost = () => {
+    viewAddPost.value = !viewAddPost.value
+}
 
 </script>
 
 <template>
-    <table class="relative justify-center w-full mt-[5px]">
-        <caption>
-            <div>
-                <h2 class="font-bold text-[1.6em] text-left p-[1em] font-family: 'Nunito Sans', helvetica uppercase">Orders Admin Panel</h2>
-                <p>a3d228bb-a1b4-40aa-ac9e-8e5ce1f9d7a6</p>
-                <button>Add Order</button>
+    <AddOrder v-if="viewAddPost"/>
+    <table class="relative justify-center w-full mt-[5px] border-[#3E685F]  bg-[#E6E6E6] table-fixed">
+        <caption class="bg-[#3E685F] rounded-tl-[25px]">
+            <div class="flex flex-row justify-between items-center">
+                <h2 class="font-bold text-[1.6em] text-left p-[1em] font-family: 'Nunito Sans', helvetica capitalize inline-block text-[white]">Orders Admin Panel</h2>
+                <p class="text-[1.6em] text-center text-[white] px-[1em]">{{currentId }}</p>
+                <button @click="setViewAddPost" class="bg-[#579587] text-[1.3em] text-[#1C2D29] font-[bold] cursor-pointer border mx-[1em] my-0 px-[1.5em] py-[1em] rounded-[20px] border-solid border-[#3E685F] hover:border hover:text-[#111C18] hover:border-solid hover:border-[#2E4B45]">
+                    Add Order</button>
             </div>
-
         </caption>
         <thead>
-            <tr><th class="text-transparent  p-2 text-[1.1em]"></th>
+            <tr>
+                <th class="text-transparent  p-2 text-[1.1em] border-b-2 border-solid border-[darkgray] w-1/35"></th>
                 <th class="border-b-2 border-r-1 border-solid border-[darkgray] p-2 text-[1.1em]"><p>ID</p></th>
                 <th class="border-b-2 border-r-1 border-solid border-[darkgray] p-2 text-[1.1em]"><p>Client</p></th>
                 <th class="border-b-2 border-r-1 border-solid border-[darkgray] p-2 text-[1.1em]"><p>Date</p></th>
                 <th class="border-b-2 border-solid border-[darkgray] p-2 text-[1.1em]"><p>Total</p></th>
-                <th class="text-transparent  p-2 text-[1.1em]"></th>
+                <th class="text-transparent  p-2 text-[1.1em] border-b-2 border-solid border-[darkgray] w-1/35"></th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="order in data" :key="order.id">
+            <tr v-for="order in paginatedOrders" :key="order.id">
                 <td class="">
-                    <button class="relative block bg-[#DDDDDD] w-full h-full cursor-pointer m-0 px-0 py-[5px]" id="BtnAccion1">
+                    <button  id="BtnAccion1" @click="" class="relative block cursor-pointer m-0 px-0 py-[5px] w-full h-[50px] bg-[darkred] bg-[url('../assets/trashcan.svg')] bg-contain bg-no-repeat bg-center border-y-[#E6E6E6] border-b border-solid border-t hover:bg-[#6A0202] hover:border-y-[black] hover:border-b hover:border-solid hover:border-t;">
                     </button>
                 </td>
                 <td class="border-r-[darkgray] border-r border-solid w-[25%] h-full">
-                    <button id="ViewIdBtn" class="relative block bg-[#DDDDDD] w-full h-full cursor-pointer  m-0 px-0 py-[5px]">{{ order.id.slice(0,20) }}...</button>
+                    <button id="ViewIdBtn" class="relative block bg-[#DDDDDD] w-full h-full cursor-pointer  m-0 px-0 py-[5px] hover:font-[600]" @click="BtnViewId(order.id)">{{ order.id.slice(0,20) }}...</button>
                 </td>
-                <td class="border-r-[darkgray] border-r border-solid"><p>{{ order.cliente }}</p></td>
+                <td class="border-r-[darkgray] border-r border-solid "><p class="whitespace-nowrap overflow-hidden text-ellipsis max-w-[200px]">{{ order.cliente }}</p></td>
                 <td class="border-r-[darkgray] border-r border-solid"><p>{{ order.fecha.slice(0,order.fecha.indexOf("T")) }}</p></td>
-                <td class="border-r-[darkgray] border-r border-solid"><p>{{ order.total.toLocaleString() }}</p></td>
+                <td class=""><p>{{ order.total.toLocaleString() }}</p></td>
                 <td>
-                    <button class="relative block bg-[#DDDDDD] w-full h-full cursor-pointer shadow-[0px_0px_10px_0px_#DDDDDD] m-0 px-0 py-[5px]" id="BtnAccion2"></button>
+                    <button id="BtnAccion2" class="relative block cursor-pointer m-0 px-0 py-[5px] w-full h-[50px] bg-[darkgreen] bg-[url('../assets/edit.svg')] bg-contain bg-no-repeat bg-center border-y-[#E6E6E6] border-b border-solid border-t hover:bg-[#004A00] hover:border-y-[black] hover:border-b hover:border-solid hover:border-t;"></button>
                 </td>
             </tr>
         </tbody>
     </table>
+    <div id="foot" class="flex fixed w-[90vw] flex-row justify-center gap-[1em] bottom-[0.3vh]">
+        <button id="goBack" @click="currentPage--" :disabled="currentPage === 1" class="bg-[#2E4B45] bg-no-repeat bg-center w-[5em] h-[50px] cursor-pointer rounded-[10px] hover:bg-[#28423D] hover:p-2.5"></button>
+        <button id="goForward" @click="currentPage++" ::disabled="currentPage >= totalPages" class=" bg-[#2E4B45] bg-no-repeat bg-center w-[5em] h-[50px] cursor-pointer rounded-[10px] hover:bg-[#28423D] hover:p-2.5"></button>
+    </div>
 </template>
 
 <style scoped>
+
 table td tr {
     display: flex;
     justify-content: center;
@@ -72,98 +107,19 @@ table td tr {
 
 table tr td {
     text-align: center;
-    /*padding-top: 5px;*/
-    /*padding-top: 0.5em;
-    padding-bottom: 0.5em;*/
+    flex:1;
 }
 
-#BtnAccion1 {
-  width: 100%;
-  height: 50px;
-  background-color: darkred;
-  background-image: url('../assets/trashcan.svg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  border-bottom: 1px solid #E6E6E6;
-  border-top: 1px solid #E6E6E6;
-}
+tbody tr {border-bottom: 1px solid #E6E6E6;}
 
-#BtnAccion1:hover {
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
-    /*padding: 3px 0px 5px 0px;*/
-    background-color: #6A0202;
-}
+tbody tr:hover {border-bottom: 1px solid gray;}
 
-#BtnAccion2 {
-  width: 100%;
-  height: 50px;
-  background-color: darkgreen;
-  background-image: url('../assets/edit.svg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  border-bottom: 1px solid #E6E6E6;
-  border-top: 1px solid #E6E6E6;
-}
+#BtnAccion1 {background-image: url('../assets/trashcan.svg');}
 
-#BtnAccion2:hover {
-    border-bottom: 1px solid black;
-    border-top: 1px solid black;
-    /*padding: 3px 0px 5px 0px;*/
-    background-color: #004A00;
-}
+#BtnAccion2 {background-image: url('../assets/edit.svg');}
 
-tbody tr {
-    border-bottom: 1px solid #E6E6E6;
-}
+#foot #goBack {background-image: url('../assets/back_arrow.svg');}
 
-tbody tr:hover {
-    border-bottom: 1px solid gray;
+#foot #goForward {background-image: url('../assets/forward_arrow.svg');}
 
-}
-
-
-
-caption {
-    background-color: #3E685F;
-    border-start-end-radius: 25px;
-    border-top-left-radius: 25px;
-    padding-top: ;
-}
-caption div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-caption h2 {
-    display: inline-block;
-    background-color: ;
-    color: white;
-}
-caption p {
-    padding-right: 1em;
-    padding-left: 1em;
-    font-size: 1.6em;
-    text-align: center;
-    color: white;
-}
-caption button {
-    margin: 0px 1em 0px 1em;
-    background-color: #45766B;
-    padding: 1em 1.5em 1em 1.5em;
-    font-size: 1.3em;
-    border-radius: 20px;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    border: 1px solid #3E685F;
-}
-
-caption button:hover {
-    border: 1px solid #2E4B45;
-}
 </style>
