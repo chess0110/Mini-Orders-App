@@ -1,3 +1,6 @@
+//import {ref} from 'vue'
+const main_access = import.meta.env.VITE_API_URL
+
 type PostType = {
     cliente : string,
     total : number
@@ -10,7 +13,7 @@ type PutType = {
 
 export async function GetOrders(){
     try {
-        const res = await fetch('http://localhost:5106/api/Orders')
+        const res = await fetch(main_access)
         const data = await res.json()
 
         //console.log(data)
@@ -30,7 +33,7 @@ export async function GetOrders(){
 export async function PostOrders(payloadPost:PostType): Promise<Response>{
     //console.log(cliente, total)
     try{
-        const res = await fetch("http://localhost:5106/api/Orders", {
+        const res = await fetch(main_access, {
             method: 'POST',
             headers: {
                 'Content-Type':'application/json',
@@ -44,14 +47,12 @@ export async function PostOrders(payloadPost:PostType): Promise<Response>{
             return error.message
         }else{
             return error
-        }
-        
+        }   
     }
-    
 }
 
 export async function DeleteOrder(id : string){
-    const res = await fetch(`http://localhost:5106/api/Orders/${id}`,{method: 'DELETE'});
+    const res = await fetch(main_access+id,{method: 'DELETE'});
     try {
         if (res){
             return true
@@ -70,7 +71,7 @@ export async function GetOneOrder(id: string): Promise<Response> {
     }
 
     try {
-        const res : Response = await fetch(`http://localhost:5106/api/Orders/${id}`);
+        const res : Response = await fetch(main_access+id);
         if (res.status == 400 || !res) {
             //console.error("Error al obtener la orden:", res.status);
             return res;
@@ -90,14 +91,14 @@ export async function GetOneOrder(id: string): Promise<Response> {
 export async function PutOrder(id: string, payloadPut:PutType): Promise<Response>{
     //console.log(cliente, total)
     try{
-        const res = await fetch(`http://localhost:5106/api/Orders/${id}`, {
+        const res = await fetch(main_access+id, {
             method: 'PUT',
             headers: {
                 'Content-Type':'application/json',
             },body: JSON.stringify(payloadPut),
         });
 
-        if(res.ok || res.status == 201){
+        if(res.ok || res.status == 201 || res.status == 405){
             return res
         }else{
             throw new Error("Error al modificar el cliente.")

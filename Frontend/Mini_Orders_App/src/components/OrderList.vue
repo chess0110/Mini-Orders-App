@@ -51,13 +51,22 @@ const BtnViewId = (id :string) => {
 }
 
 const paginatedOrders = computed(() => {
-  const start = (currentPage.value - 1) * itemsPerPage;
-  const end = start + itemsPerPage;
-  return data.value.slice(start, end);
+    try{
+        const start = (currentPage.value - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        return data.value.slice(start, end);   
+    }catch(error){
+        return;
+    }
+
 });
 
 const totalPages = computed(() => {
-  return Math.ceil(data.value.length / itemsPerPage);
+    try{
+        return Math.ceil(data.value.length / itemsPerPage);
+    }catch{
+        return 0;
+    }
 });
 
 const setViewAddPost = () => {
