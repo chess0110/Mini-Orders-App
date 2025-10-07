@@ -68,3 +68,4 @@ C:\Users\aguti\OneDrive\Documentos\alterna\practica .net\net8\Backend\OrdersChal
 C:\Users\aguti\OneDrive\Documentos\alterna\practica .net\net8\Backend\OrdersChallenge\OrdersChallenge\obj\Debug\net8.0\OrdersChallenge.pdb
 C:\Users\aguti\OneDrive\Documentos\alterna\practica .net\net8\Backend\OrdersChallenge\OrdersChallenge\obj\Debug\net8.0\OrdersChallenge.genruntimeconfig.cache
 C:\Users\aguti\OneDrive\Documentos\alterna\practica .net\net8\Backend\OrdersChallenge\OrdersChallenge\obj\Debug\net8.0\ref\OrdersChallenge.dll
+C:\Users\aguti\OneDrive\Documentos\alterna\practica .net\net8\Backend\OrdersChallenge\OrdersChallenge\obj\Debug\net8.0\OrdersChallenge.sourcelink.json
