@@ -30,7 +30,7 @@ export async function GetOrders(){
 
 }
 
-export async function PostOrders(payloadPost:PostType): Promise<Response>{
+export async function PostOrders(payloadPost:PostType){
     //console.log(cliente, total)
     try{
         const res = await fetch(main_access, {
@@ -40,14 +40,15 @@ export async function PostOrders(payloadPost:PostType): Promise<Response>{
             },body: JSON.stringify(payloadPost),
         });
 
-        return res
+        if(res.ok || res){
+            return res
+        }
 
     }catch(error){
         if(error instanceof Error){
-            return error.message
-        }else{
-            return error
-        }   
+            return error??null
+        }
+        return error
     }
 }
 
@@ -64,10 +65,10 @@ export async function DeleteOrder(id : string){
     }
 } 
 
-export async function GetOneOrder(id: string): Promise<Response> {
+export async function GetOneOrder(id: string) {
     if (!id || id.trim() === "") {
         console.warn("ID vacío o inválido");
-        return null;
+        throw new Error("Error al modificar el cliente.")
     }
 
     try {
@@ -78,17 +79,18 @@ export async function GetOneOrder(id: string): Promise<Response> {
         }else{
             const data = await res.json();
             return data ?? null;
+            //return res
         }
     } catch (error) {
         //console.error("Error en la petición:", error);
         if (error instanceof Response){
             return error
         }
-        return;
+        throw new Error("Error al obtener la orden.")
     }
 }
 
-export async function PutOrder(id: string, payloadPut:PutType): Promise<Response>{
+export async function PutOrder(id: string, payloadPut:PutType){
     //console.log(cliente, total)
     try{
         const res = await fetch(main_access+id, {

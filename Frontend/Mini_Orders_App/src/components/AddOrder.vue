@@ -24,7 +24,7 @@ const addPostRequest = async () => {
         "total" : total
         }
         try {
-            const res : Response = await PostOrders(preparePost);
+            const res  = await PostOrders(preparePost) as Response;
             if (res.ok || res.status == 201){
                 mensaje.value = "Cliente agregado.";  
             }

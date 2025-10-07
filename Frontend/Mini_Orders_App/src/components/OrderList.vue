@@ -15,7 +15,7 @@ type OrderType = {
 
 const data = ref<OrderType[]>([])
 const dataStatus = ref<boolean>(true)
-const oneData = ref<OrderType[]>([])
+const oneData = ref<[{id:"",cliente:"",fecha:"",total:number}]>([{id:"",cliente:"",fecha:"",total:0}])
 const currentId = ref()
 const currentMessage = ref()
 const currentPage = ref(1);
