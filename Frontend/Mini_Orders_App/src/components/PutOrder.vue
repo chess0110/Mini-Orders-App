@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref, type Ref} from "vue"
+import {ref} from "vue"
 import { PutOrder } from "../services/HttpRequests"
 
 const props = defineProps<{readonly idFromMain : string; readonly clientFromMain: string; readonly totalFromMain : number}>();
@@ -8,12 +8,12 @@ const props = defineProps<{readonly idFromMain : string; readonly clientFromMain
 const mensaje = ref<string>("")
 const clienteInput = ref(props.clientFromMain)
 const totalInput = ref(props.totalFromMain)
-
+/*
 type PutType = {
     cliente : string,
     fecha : String,
     total : number
-}
+}*/
 
 const addPutRequest = async (id : string) => {
     const cliente : string = clienteInput.value
@@ -37,7 +37,7 @@ const addPutRequest = async (id : string) => {
         };
         
         try {
-            const res : Response = await PutOrder(id,preparePut);
+            const res = await PutOrder(id,preparePut) as Response;
             if (res.ok || res.status == 201) {
                 //mensaje.value = res.ok.toString()
                 mensaje.value = "Orden actualizada correctamente.";
