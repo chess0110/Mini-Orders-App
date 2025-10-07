@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OrdersChallenge")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+432dc5d9b8c0cc599ad3ad0cfd76d27d84c9becd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fd13d8079b408a1d610799100daeb8c1855151a4")]
 [assembly: System.Reflection.AssemblyProductAttribute("OrdersChallenge")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OrdersChallenge")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

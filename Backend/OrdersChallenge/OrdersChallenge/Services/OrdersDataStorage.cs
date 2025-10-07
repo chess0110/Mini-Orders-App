@@ -16,25 +16,10 @@ namespace OrdersChallenge.Services
                 /*new OrdersModel()
                 {
                     Id = Guid.NewGuid(),
-                    Cliente = "Juan Ramirez",
+                    Cliente = "Nombre Cliente",
                     Fecha = DateTime.Now,
                     Total = 76614
-                },
-                new OrdersModel()
-                {
-                    Id = Guid.NewGuid(),
-                    Cliente = "Amelia Alcantara",
-                    Fecha = DateTime.Now,
-                    Total = 55917
-                },
-                new OrdersModel()
-                {
-                    Id = Guid.NewGuid(),
-                    Cliente = "Augusto Martinez",
-                    Fecha = DateTime.Now,
-                    Total = 46548
-                }*/
-
+                }*/ 
             };
 
         }
