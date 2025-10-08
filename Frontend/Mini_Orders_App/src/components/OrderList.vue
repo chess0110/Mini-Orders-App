@@ -183,7 +183,7 @@ const manageUpdate = (id: string, client: string, total: number) => {
     searchBarTarget.value = id
     searchBarStatus.value = false
     viewAddPut.value = true
-
+    viewAddPost.value = false
     currentMessage.value = ""
     currentId.value = ""
     //console.log(`idToUpdate: ${idToUpdate} -- id: ${id}`)
@@ -194,7 +194,7 @@ const manageUpdate = (id: string, client: string, total: number) => {
 <template>
 
     <table class="relative justify-center w-full mt-[5px] border-[#3E685F]  bg-[#E6E6E6] table-fixed">
-        <caption class="bg-[#3E685F] rounded-tl-[25px]">
+        <caption class="bg-[#3E685F] rounded-tl-[25px] rounded-tr-[25px] pr-[10px]">
             <div class="flex flex-row justify-between items-center">
                 <h2 class="font-bold text-[1.6em] text-left p-[1em] font-family: 'Nunito Sans', helvetica capitalize inline-block text-[white]">Orders Admin Panel</h2>
                 <p class="text-[1.6em] text-center text-[white] px-[1em]"><span class="text-[darkred]">{{currentMessage}}</span><span class="text-[darkorange]">{{currentId}}</span></p>
@@ -230,15 +230,15 @@ const manageUpdate = (id: string, client: string, total: number) => {
 
             <!-- POST Y PUT-->
             <tr><td>
-            <div class="flex absolute flex-col bg-[#538A7D] top-[5.6em] flex-wrap">
+            <div class="flex absolute flex-col bg-[#538A7D] top-[5.6em] w-[100%]">
                 <!-- VISTA PARA POST (INTERFAZ)-->
-                <AddOrder v-if="viewAddPost"/>
+                <AddOrder v-if="viewAddPost" class="w-[100%] left-0 "/>
                 <!-- VISTA PARA PUT (INTERFAZ)-->
-                <PutOrder v-if="viewAddPut" :idFromMain="idToUpdate" :clientFromMain="currentClientName" :totalFromMain="currentTotalAmount"/>
+                <PutOrder v-if="viewAddPut" :idFromMain="idToUpdate" :clientFromMain="currentClientName" :totalFromMain="currentTotalAmount" class="w-[100%] left-0 "/>
                 <!-- BOTON PARA POST-->
-                <button v-if="viewAddPost" id="closeAddOrder" @click="refreshList" class="z-2 bg-[#3E685F] block text-[#fff] text-[2em] font-bold cursor-pointer mx-[0em] my-0 px-[1em] py-[0.4em]  hover:bg-[#375E55] w-[100%]">X</button>
+                <button v-if="viewAddPost" id="closeAddOrder" @click="refreshList" class="sticky bottom-0 z-2 bg-[#3E685F] block text-[#fff] text-[2em] font-bold cursor-pointer mx-[0em] my-0 px-[1em] py-[0.4em]  hover:bg-[#375E55] w-[100%]">X</button>
                 <!-- BOTON PARA PUT-->
-                <button v-if="viewAddPut" id="closeAddOrder" @click="refreshList" class="z-2 bg-[#3E685F] block text-[#fff] text-[2em] font-bold cursor-pointer mx-[0em] my-0 px-[1em] py-[0.4em]  hover:bg-[#375E55] w-[100%]">X</button>
+                <button v-if="viewAddPut" id="closeAddOrder" @click="refreshList" class="sticky bottom-0 z-2 bg-[#3E685F] block text-[#fff] text-[2em] font-bold cursor-pointer mx-[0em] my-0 px-[1em] py-[0.4em]  hover:bg-[#375E55] w-[100%]">X</button>
             </div>
             </td></tr>
 
@@ -275,11 +275,9 @@ const manageUpdate = (id: string, client: string, total: number) => {
                     <button id="BtnAccion2" @click="manageUpdate(order.id,order.cliente,order.total)" class="relative block cursor-pointer m-0 px-0 py-[5px] w-full h-[50px] bg-[darkgreen] bg-contain bg-no-repeat bg-center border-y-[#E6E6E6] border-b border-solid border-t hover:bg-[#004A00] hover:border-y-[black] hover:border-b hover:border-solid hover:border-t;"></button>
                 </td>
             </tr>
-
-
         </tbody>
     </table>
-    <div id="foot" class="flex fixed w-[90vw] flex-row justify-center gap-[1em] bottom-[0.3vh]">
+    <div id="foot" class="sticky bottom-0 w-[100%] bg-[#E5E5E5] flex justify-center gap-[10px] items-end rounded-[20px]">
         <button v-if="!viewAddPost && !viewAddPut" id="goBack" @click="currentPage--" :disabled="currentPage === 1" class="bg-[#2E4B45] bg-no-repeat bg-center w-[5em] h-[50px] cursor-pointer rounded-[10px] hover:bg-[#28423D] hover:p-2.5"></button>
         <button v-if="!viewAddPost && !viewAddPut" id="goForward" @click="currentPage++" :disabled="currentPage >= totalPages" class=" bg-[#2E4B45] bg-no-repeat bg-center w-[5em] h-[50px] cursor-pointer rounded-[10px] hover:bg-[#28423D] hover:p-2.5"></button>
     </div>
