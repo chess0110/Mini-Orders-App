@@ -34,7 +34,13 @@ dotnet build
 * **Abre la terminal en esa carpeta**
 * **Ejecuta el comando: "dotnet run"**
 
-### **Nota:** Para interactuar con el proyecto coloca la ip del frontend en el navegador.
+## Agrega la url del backend en el entorno del frontend:
+1. **Ve a la carpeta raiz "Mini_Orders_App" que contiene el Frontend**
+2. **Crea un archivo llamado " .env "**
+3. **Abre el archivo ".env" y pega tu ip del backend en la variable:**
+```VITE_API_URL = http://localhost:#### ```
+
+#### **Nota:** Para interactuar con el proyecto inicia el frontend y el backend al mismo tiempo, luego coloca la ip del frontend en el navegador.
 
 ## Utilidades:
 1. _Organizar cuentas pendientes_
