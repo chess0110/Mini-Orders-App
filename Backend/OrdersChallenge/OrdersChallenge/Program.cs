@@ -8,7 +8,7 @@ builder.Services.AddControllers();
 builder.Services.AddCors(options => 
 {
     options.AddPolicy("AllowFrontend",
-    policy => policy.WithOrigins("http://localhost:5173")
+    policy => policy.WithOrigins("https://zingy-malasada-cc1650.netlify.app","http://localhost:5173")
                     .AllowAnyHeader()
                     .AllowAnyMethod());
 });
@@ -22,11 +22,14 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+/*
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+}*/
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseAuthorization();
 app.UseCors("AllowFrontend");
