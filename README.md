@@ -40,7 +40,7 @@ dotnet build
 3. **Abre el archivo ".env" y pega tu ip del backend en la variable:**
 ```VITE_API_URL = http://localhost:####/api/orders/ ```
 
-### Para interactuar con el proyecto 
+## Para interactuar con el proyecto 
 * Inicia el frontend y el backend al mismo tiempo, luego coloca la ip del frontend en el navegador:
 1. En " Mini_Orders_App " ejecutar ```npm run dev```
 2. En " OrdersChallenge " ejecutar ```dotnet run```
