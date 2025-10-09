@@ -38,9 +38,15 @@ dotnet build
 1. **Ve a la carpeta raiz "Mini_Orders_App" que contiene el Frontend**
 2. **Crea un archivo llamado " .env "**
 3. **Abre el archivo ".env" y pega tu ip del backend en la variable:**
-```VITE_API_URL = http://localhost:####/ ```
+```VITE_API_URL = http://localhost:####/api/orders/ ```
 
-#### **Nota:** Para interactuar con el proyecto inicia el frontend y el backend al mismo tiempo, luego coloca la ip del frontend en el navegador.
+### Para interactuar con el proyecto 
+* Inicia el frontend y el backend al mismo tiempo, luego coloca la ip del frontend en el navegador:
+1. En " Mini_Orders_App " ejecutar ```npm run dev```
+2. En " OrdersChallenge " ejecutar ```dotnet run```
+#### Notas para iniciar Frontend y Backend
+* ** (Frontend:```npm run dev```): En la capeta " Mini_Orders_App " que contiene el archivo " .env " previamente creado."**
+* ** (Backend:```dotnet run```): En la capeta " OrdersChallenge " que contiene el archivo .csproj y " Program.cs "**
 
 ## Utilidades:
 1. _Organizar cuentas pendientes_
@@ -48,10 +54,19 @@ dotnet build
 3. _Registro de cobros_
 
 ## Ejemplos de uso:
+### Vista princicipal - (datos aleatorios de prueba)
 <img width="1919" height="1079" alt="Captura de pantalla 2025-10-08 103624" src="https://github.com/user-attachments/assets/3febab5f-6998-40b4-8c22-fb405c5fbde0" />
+
+### Mensaje al borrar una orden:
 <img width="1919" height="106" alt="Captura de pantalla 2025-10-08 103818" src="https://github.com/user-attachments/assets/97671afc-8700-4890-a074-627ce6d30334" />
+
+### Barra de busqueda por id:
 <img width="1919" height="115" alt="Captura de pantalla 2025-10-08 103809" src="https://github.com/user-attachments/assets/622ed4cf-86a7-4063-9264-bfa96c3c0c50" />
+
+### Vista -> Agregar una orden
 <img width="1919" height="1079" alt="Captura de pantalla 2025-10-08 103521" src="https://github.com/user-attachments/assets/fbbef6b3-49a1-4fa6-8ab1-15d8ad1836b7" />
+
+### Vista -> Actualizar una orden
 <img width="1919" height="1079" alt="Captura de pantalla 2025-10-08 103533" src="https://github.com/user-attachments/assets/e96fbe25-4fb8-4ba6-bc0e-432130309912" />
 
 
