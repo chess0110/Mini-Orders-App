@@ -45,8 +45,8 @@ dotnet build
 1. En " Mini_Orders_App " ejecutar ```npm run dev```
 2. En " OrdersChallenge " ejecutar ```dotnet run```
 #### Notas para iniciar Frontend y Backend
-* ** (Frontend:```npm run dev```): En la capeta " Mini_Orders_App " que contiene el archivo " .env " previamente creado."**
-* ** (Backend:```dotnet run```): En la capeta " OrdersChallenge " que contiene el archivo .csproj y " Program.cs "**
+* **(Frontend:```npm run dev```): En la capeta " Mini_Orders_App " que contiene el archivo " .env " previamente creado."**
+* **(Backend:```dotnet run```): En la capeta " OrdersChallenge " que contiene el archivo .csproj y " Program.cs "**
 
 ## Utilidades:
 1. _Organizar cuentas pendientes_
